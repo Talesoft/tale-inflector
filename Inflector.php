@@ -18,7 +18,7 @@ class Inflector
      *
      * @var array
      */
-    private static $_uncountables = [
+    private static $uncountables = [
         'equipment',
         'information',
         'rice',
@@ -36,7 +36,7 @@ class Inflector
      *
      * @var array
      */
-    private static $_irregulars = [
+    private static $irregulars = [
         'person' => 'people',
         'man'    => 'men',
         'child'  => 'children',
@@ -51,7 +51,7 @@ class Inflector
      *
      * @var array
      */
-    private static $_plurals = [
+    private static $plurals = [
         '/(quiz)$/i'               => '$1zes',
         '/^(ox)$/i'                => '$1en',
         '/([m|l])ouse$/i'          => '$1ice',
@@ -79,7 +79,7 @@ class Inflector
      *
      * @var array
      */
-    private static $_singulars = [
+    private static $singulars = [
         '/(quiz)zes$/i'                                                    => '\1',
         '/(matr)ices$/i'                                                   => '\1ix',
         '/(vert|ind)ices$/i'                                               => '\1ex',
@@ -111,7 +111,7 @@ class Inflector
      *
      * @var array
      */
-    private static $_stopWords = [
+    private static $stopWords = [
         'a',
         'about',
         'above',
@@ -447,16 +447,16 @@ class Inflector
 
         $lowerCased = strtolower($string);
 
-        foreach (self::$_uncountables as $uncountable)
+        foreach (self::$uncountables as $uncountable)
             if (substr($lowerCased, (-1 * strlen($uncountable))) == $uncountable)
                 return $string;
 
-        foreach (self::$_irregulars as $singular => $plural)
+        foreach (self::$irregulars as $singular => $plural)
             if (preg_match('/('.$singular.')$/i', $string, $matches))
                 return preg_replace('/('.$singular.')$/i', substr($matches[0], 0, 1).substr($plural, 1), $string);
 
 
-        foreach (self::$_plurals as $rule => $replacement)
+        foreach (self::$plurals as $rule => $replacement)
             if (preg_match($rule, $string))
                 return preg_replace($rule, $replacement, $string);
 
@@ -477,16 +477,16 @@ class Inflector
 
         $lowerCased = strtolower($string);
 
-        foreach (self::$_uncountables as $uncountable)
+        foreach (self::$uncountables as $uncountable)
             if (substr($lowerCased, (-1 * strlen($uncountable))) == $uncountable)
                 return $string;
 
-        foreach (self::$_irregulars as $singular => $plural)
+        foreach (self::$irregulars as $singular => $plural)
             if (preg_match('/('.$plural.')$/i', $string, $matches))
                 return preg_replace('/('.$plural.')$/i', substr($matches[0], 0, 1).substr($singular, 1), $string);
 
 
-        foreach (self::$_singulars as $rule => $replacement)
+        foreach (self::$singulars as $rule => $replacement)
             if (preg_match($rule, $string))
                 return preg_replace($rule, $replacement, $string);
 
@@ -695,7 +695,7 @@ class Inflector
     {
 
         $string = self::canonicalize($string, $ignore);
-        $stopWords = self::$_stopWords;
+        $stopWords = self::$stopWords;
         $string = implode('-', array_filter(explode('-', $string), function ($val) use ($stopWords) {
 
             return !in_array($val, $stopWords);
