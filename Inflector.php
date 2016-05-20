@@ -510,7 +510,7 @@ class Inflector
      *
      * @return string The re-joined string
      */
-    public static function reJoin($string, $delimiter = null, $ignore = null)
+    public static function rejoin($string, $delimiter = null, $ignore = null)
     {
 
         $delimiter = !is_null($delimiter) ? $delimiter : ' ';
@@ -547,7 +547,7 @@ class Inflector
     public static function humanize($string, $ignore = null)
     {
 
-        return ucwords(strtolower(self::reJoin($string, ' ', $ignore)));
+        return ucwords(strtolower(self::rejoin($string, ' ', $ignore)));
     }
 
     /**
@@ -588,7 +588,7 @@ class Inflector
     public static function dasherize($string, $ignore = null)
     {
 
-        return self::reJoin($string, '-', $ignore);
+        return self::rejoin($string, '-', $ignore);
     }
 
     /**
@@ -691,7 +691,7 @@ class Inflector
      *
      * @return string The lower-cased-dash-separated string
      */
-    public static function slugify($string, $ignore = null)
+    public static function urlify($string, $ignore = null)
     {
 
         $string = self::canonicalize($string, $ignore);

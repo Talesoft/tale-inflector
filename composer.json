@@ -4,13 +4,8 @@
     "keywords": ["string", "bending", "inflection", "manipulation"],
     "description": "A library that can inflect strings to many formats",
     "license": "MIT",
-    "homepage": "http://inflector.tale.talesoft.io",
+    "homepage": "http://docs.talesoft.io/tale-framework/tale/inflector",
     "authors": [
-        {
-            "name": "Talesoft",
-            "homepage": "http://talesoft.io",
-            "email": "info@talesoft.io"
-        },
         {
             "name": "Torben Koehn",
             "email": "tk@talesoft.io"
