@@ -10,10 +10,10 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider reJoinProvider
      */
-    public function testReJoin($expected, $string, $delimiter)
+    public function testRejoin($expected, $string, $delimiter)
     {
 
-        $this->assertEquals($expected, Inflector::reJoin($string, $delimiter), "$string ($delimiter)");
+        $this->assertEquals($expected, Inflector::rejoin($string, $delimiter), "$string ($delimiter)");
     }
 
     public function reJoinProvider()
