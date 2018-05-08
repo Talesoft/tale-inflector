@@ -53,7 +53,7 @@ class StrategyFactory implements StrategyFactoryInterface
         return $this->namedStrategies;
     }
 
-    public function addNamedStrategy(string $name, string $className): self
+    public function addNamedStrategy(string $name, string $className): StrategyFactoryInterface
     {
         $this->validateClassName($className);
         $this->namedStrategies[$name] = $className;

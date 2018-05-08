@@ -8,6 +8,9 @@ use Tale\Inflector\StrategyFactoryInterface;
 
 class Inflector
 {
+    /**
+     * @var StrategyFactoryInterface
+     */
     private $strategyFactory;
 
     /**
@@ -42,7 +45,7 @@ class Inflector
         return $string;
     }
 
-    public static function create(StrategyFactoryInterface $strategyFactory = null)
+    public static function create(StrategyFactoryInterface $strategyFactory = null): self
     {
         return new self($strategyFactory);
     }

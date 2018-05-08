@@ -2,16 +2,19 @@
 language: php
 
 git:
-  depth: 5
+    depth: 5
 
 php:
-  - 7.1
-  - 7.2
-
-before_install:
-  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then phpenv config-rm xdebug.ini; fi;
+    - 7.1
+    - 7.2
 
 install:
-  - composer clear-cache
-  - composer self-update
-  - composer install
+    - composer self-update
+    - composer install
+
+script:
+    - vendor/bin/tale-dev check --report --coverage-php-version=7.1
+
+addons:
+    code_climate:
+        repo_token: 9c681c931a1a0411dfc5f0ed09cb647976fc142692b5141f444a336c1dadc2ec

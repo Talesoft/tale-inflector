@@ -1,11 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace Tale\Test;
 
 use PHPUnit\Framework\TestCase;
 use Tale\Inflector;
+use Tale\Inflector\Strategy\TestStrategy;
 use Tale\Inflector\StrategyFactory;
+use Tale\Test\Inflector\TestStrategyFactory;
 
+/**
+ * @coversDefaultClass \Tale\Inflector
+ */
 class InflectorTest extends TestCase
 {
     private $values = ['Some test-String', 'XmlHTTPRequest', 'car', 'red-houses', '1', '2', '3', '4', '12', '23'];
@@ -23,6 +29,48 @@ class InflectorTest extends TestCase
         StrategyFactory::STRATEGY_ORDINALIZE => ['Some test-String', 'XmlHTTPRequest', 'car', 'red-houses', '1st', '2nd', '3rd', '4th', '12th', '23rd']
     ];
 
+    /**
+     * @covers ::__construct
+     * @covers ::getStrategyFactory
+     */
+    public function testConstruct()
+    {
+        $instance = new Inflector();
+        $this->assertInstanceOf(StrategyFactory::class, $instance->getStrategyFactory());
+
+        $instance = new Inflector(new TestStrategyFactory());
+        $this->assertInstanceOf(TestStrategyFactory::class, $instance->getStrategyFactory());
+    }
+
+    /**
+     * @covers ::addNamedStrategy
+     */
+    public function testAddNamedStrategy()
+    {
+        $instance = new Inflector();
+        $instance->addNamedStrategy('test', TestStrategy::class);
+
+        $namedStrategies = $instance->getStrategyFactory()->getNamedStrategies();
+        $this->assertArrayHasKey('test', $namedStrategies);
+        $this->assertEquals(TestStrategy::class, $namedStrategies['test']);
+    }
+
+
+    /**
+     * @covers ::inflect
+     * @covers ::create
+     * @covers ::inflectString
+     * @covers ::pluralize
+     * @covers ::singularize
+     * @covers ::humanize
+     * @covers ::camelize
+     * @covers ::dasherize
+     * @covers ::underscorize
+     * @covers ::variablize
+     * @covers ::tableize
+     * @covers ::canonicalize
+     * @covers ::ordinalize
+     */
     public function testInflection()
     {
         $inflector = new Inflector();

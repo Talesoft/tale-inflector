@@ -1,19 +1,23 @@
 
-# Tale Inflector
+Tale Inflector
+==============
 
-# What is Tale Inflector?
+What is Tale Inflector?
+-----------------------
 
 Tale inflector bends strings into different naming styles.
 A common use-case would be the converting of class-names or property-names 
 to table-names or titles to slugs for URLs.
 
-# Installation
+Installation
+------------
 
 ```bash
 composer require talesoft/tale-inflector
 ```
 
-# Usage
+Usage
+-----
 
 ```php
 use Tale\Inflector;
@@ -32,7 +36,8 @@ $inflector->inflect('Was höre ich da?', ['canonicalize']); //was-hore-ich-da
 Inflector::canonicalize('Some random title'); //some-random-title
 ```
 
-# Available strategies/static methods
+Available strategies/static methods
+-----------------------------------
 
 ### camelize
 
@@ -107,7 +112,8 @@ Inflector::canonicalize('Some random title'); //some-random-title
     houses = house
     
 
-# Roll your own
+Roll your own
+-------------
 
  ```php
 use Tale\Inflector\StrategyInterface;
