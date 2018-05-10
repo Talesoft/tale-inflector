@@ -28,10 +28,6 @@ abstract class AbstractCountableStrategy implements StrategyInterface
 
     protected function isUncountable(string $string): bool
     {
-        if (is_numeric($string)) {
-            return true;
-        }
-
         $string = strtolower($string);
         foreach (static::UNCOUNTABLES as $uncountable) {
             if (substr($string, -1 * \strlen($uncountable)) === $uncountable) {

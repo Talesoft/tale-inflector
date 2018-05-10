@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tale\Inflector\Strategy;
 
-class DashRejoinStrategy extends RejoinStrategy
+class DashStrategy extends RejoinStrategy
 {
     protected const DELIMITER = '-';
 }

@@ -5,7 +5,7 @@ namespace Tale\Inflector\Strategy;
 
 use Tale\Inflector\StrategyInterface;
 
-class NumberOrdinalStrategy implements StrategyInterface
+class OrdinalStrategy implements StrategyInterface
 {
     public function inflect(string $string): string
     {

@@ -19,7 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Tale\\": "src"
+            "Tale\\": "src",
+            "Tale\\Test\\": "tests"
         }
     }
 }

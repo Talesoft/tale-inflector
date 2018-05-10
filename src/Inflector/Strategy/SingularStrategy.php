@@ -29,8 +29,30 @@ class SingularStrategy extends AbstractCountableStrategy
         '/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i' => '\1\2sis',
         '/([ti])a$/i'                                                      => '\1um',
         '/(n)ews$/i'                                                       => '\1ews',
-        '/s$/i'                                                            => '',
     ];
+
+    private function getIrregularSingular(string $string): ?string
+    {
+
+        foreach (static::IRREGULARS as $singular => $plural) {
+            if (!preg_match('/(' . $plural . ')$/i', $string, $matches)) {
+                continue;
+            }
+            return preg_replace('/(' . $plural . ')$/i', $matches[0][0] . substr($singular, 1), $string);
+        }
+        return null;
+    }
+
+    private function getSingular(string $string): ?string
+    {
+        foreach (static::PATTERNS as $rule => $replacement) {
+            if (!preg_match($rule, $string)) {
+                continue;
+            }
+            return preg_replace($rule, $replacement, $string);
+        }
+        return preg_replace('/s$/i', '', $string);
+    }
 
     public function inflect(string $string): string
     {
@@ -38,18 +60,10 @@ class SingularStrategy extends AbstractCountableStrategy
             return $string;
         }
 
-        foreach (static::IRREGULARS as $singular => $plural) {
-            if (preg_match('/(' . $plural . ')$/i', $string, $matches)) {
-                return preg_replace('/(' . $plural . ')$/i', $matches[0][0] . substr($singular, 1), $string);
-            }
+        if (($irregularSingular = $this->getIrregularSingular($string)) !== null) {
+            return $irregularSingular;
         }
 
-        foreach (static::PATTERNS as $rule => $replacement) {
-            if (preg_match($rule, $string)) {
-                return preg_replace($rule, $replacement, $string);
-            }
-        }
-
-        return $string;
+        return $this->getSingular($string);
     }
 }

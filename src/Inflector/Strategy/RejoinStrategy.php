@@ -12,7 +12,7 @@ class RejoinStrategy implements StrategyInterface
 
     public function inflect(string $string): string
     {
-        $quotedDelimiter = static::DELIMITER === '' ? '' : preg_quote(static::DELIMITER, '/');
+        $quotedDelimiter = preg_quote(static::DELIMITER, '/');
 
         $inflectedString = $string;
         if (\function_exists('transliterator_transliterate')) {
@@ -34,8 +34,6 @@ class RejoinStrategy implements StrategyInterface
         );
 
         //finally remove repeating chars, so "something & something" wont end in "something---something"
-        return static::DELIMITER === ''
-            ? $inflectedString
-            : trim(preg_replace('/'.$quotedDelimiter.'+/', static::DELIMITER, $inflectedString), static::DELIMITER);
+        return trim(preg_replace('/'.$quotedDelimiter.'+/', static::DELIMITER, $inflectedString), static::DELIMITER);
     }
 }

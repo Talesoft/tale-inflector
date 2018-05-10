@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tale\Inflector\Strategy;
+namespace Tale\Test\Inflector\Strategy;
 
 use Tale\Inflector\StrategyInterface;
 

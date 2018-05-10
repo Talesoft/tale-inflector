@@ -50,8 +50,12 @@ class Inflector
         return new self($strategyFactory);
     }
 
-    public static function inflectString(string $string, array $strategies, StrategyFactoryInterface $strategyFactory = null): string
-    {
+    public static function inflectString(
+        string $string,
+        array $strategies,
+        StrategyFactoryInterface $strategyFactory = null
+    ): string {
+    
         return self::create($strategyFactory)->inflect($string, $strategies);
     }
 
@@ -169,9 +173,14 @@ class Inflector
      *
      * @return string The camelCased string
      */
-    public static function variablize(string $string): string
+    public static function variableize(string $string): string
     {
         return self::inflectString($string, [StrategyFactory::STRATEGY_VARIABLEIZE]);
+    }
+
+    public static function constantize(string $string): string
+    {
+        return self::inflectString($string, [StrategyFactory::STRATEGY_CONSTANTIZE]);
     }
 
     /**

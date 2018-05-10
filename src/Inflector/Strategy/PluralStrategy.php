@@ -22,9 +22,30 @@ class PluralStrategy extends AbstractCountableStrategy
         '/(alias|status)/i'        => '$1es',
         '/(octop|vir)us$/i'        => '$1i',
         '/(ax|test)is$/i'          => '$1es',
-        '/s$/i'                    => 's',
-        '/$/'                      => 's'
+        '/s$/i'                    => 's'
     ];
+
+    private function getIrregularPlural(string $string): ?string
+    {
+        foreach (static::IRREGULARS as $singular => $plural) {
+            if (!preg_match('/(' . $singular . ')$/i', $string, $matches)) {
+                continue;
+            }
+            return preg_replace('/(' . $singular . ')$/i', $matches[0][0] . substr($plural, 1), $string);
+        }
+        return null;
+    }
+
+    private function getPlural(string $string): ?string
+    {
+        foreach (static::PATTERNS as $rule => $replacement) {
+            if (!preg_match($rule, $string)) {
+                continue;
+            }
+            return preg_replace($rule, $replacement, $string);
+        }
+        return preg_replace('/$/', 's', $string);
+    }
 
     public function inflect(string $string): string
     {
@@ -32,18 +53,10 @@ class PluralStrategy extends AbstractCountableStrategy
             return $string;
         }
 
-        foreach (static::IRREGULARS as $singular => $plural) {
-            if (preg_match('/(' . $singular . ')$/i', $string, $matches)) {
-                return preg_replace('/(' . $singular . ')$/i', $matches[0][0] . substr($plural, 1), $string);
-            }
+        if (($irregularPlural = $this->getIrregularPlural($string)) !== null) {
+            return $irregularPlural;
         }
 
-        foreach (static::PATTERNS as $rule => $replacement) {
-            if (preg_match($rule, $string)) {
-                return preg_replace($rule, $replacement, $string);
-            }
-        }
-
-        return $string;
+        return $this->getPlural($string);
     }
 }
