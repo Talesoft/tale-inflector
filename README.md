@@ -29,7 +29,7 @@ $inflector->inflect('ProductAttribute', ['tableize', 'pluralize']); //product_at
 $inflector->inflect('someProperty', ['tableize']); //some_property
 
 //Canonicalization / slugs
-$inflector->inflect('Some title I inserted', ['canonicalize']); //some-title-i-inserter
+$inflector->inflect('Some title I inserted', ['canonicalize']); //some-title-i-inserted
 $inflector->inflect('Was höre ich da?', ['canonicalize']); //was-hore-ich-da
 
 //Or just use the static methods for quick access
