@@ -6,8 +6,8 @@ What is Tale Inflector?
 -----------------------
 
 Tale inflector bends strings into different naming styles.
-A common use-case would be the converting of class-names or property-names 
-to table-names or titles to slugs for URLs.
+A common use-case would be the converting of class-names or property-names to table-names or titles to slugs for URLs. 
+I can also generate the plural or singular of a string or ordinalize numbers.
 
 Installation
 ------------
